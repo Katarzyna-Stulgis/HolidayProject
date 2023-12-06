@@ -14,6 +14,7 @@
                         <p class="card-text"><strong>Location:</strong> @property.Location</p>
                         <p class="card-text"><strong>Bedrooms:</strong> @property.NumberOfBedrooms</p>
                         <p class="card-text"><strong>Cost per Night:</strong> $@property.CostPerNight</p>
+                        <a href="@Url.Action("ViewPropertyDetails", "PropertyListing", new { id = property.Id })">View Details</a>
                     </div>
                 </div>
             </div>
