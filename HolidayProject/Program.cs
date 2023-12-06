@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Domain.Repositories;
+using HolidayProject.Mappings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var services = builder.Services;
-services.AddTransient<IPropertyRepository, DummyPropertyRepository>();
+services.AddTransient<IPropertyRepository, EfPropertyRepository>();
+
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -17,6 +19,11 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+services.AddAutoMapper(
+    typeof(Program),
+    typeof(Mapping)
+    );
 
 var app = builder.Build();
 
