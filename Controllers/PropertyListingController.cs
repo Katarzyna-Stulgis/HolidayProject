@@ -16,7 +16,7 @@ namespace HolidayProject.Controllers
                 NumberOfBedrooms = 3,
                 CostPerNight = 350,
                 Description = "A charming cottage with stunning views.",
-                Amenities = new List<string> { "WiFi", "Parking", "Garden" },
+                Amenities = "WiFi",
                 BookedDates = new List<DateTime> { DateTime.Now.AddDays(5), DateTime.Now.AddDays(10) }
             },
             new PropertyDetailsModel
@@ -28,7 +28,7 @@ namespace HolidayProject.Controllers
                 NumberOfBedrooms = 7,
                 CostPerNight = 730,
                 Description = "A grand stately home with luxurious amenities.",
-                Amenities = new List<string> { "Pool", "Tennis Court", "Sauna" },
+                Amenities = "Pool",
                 BookedDates = new List<DateTime> { DateTime.Now.AddDays(8), DateTime.Now.AddDays(15) }
             }
         };

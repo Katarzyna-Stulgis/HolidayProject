@@ -26,6 +26,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="PropertyListing" asp-action="ListAll">ListAll</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="PropertyManagement" asp-action="AddProperty">Add New Property</a>
+                        </li>
 
                     </ul>
                     <partial name="_LoginPartial" />
@@ -35,7 +41,6 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @await Component.InvokeAsync("SearchProperties")
             @RenderBody()
         </main>
     </div>
