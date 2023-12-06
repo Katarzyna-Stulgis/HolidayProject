@@ -1,5 +1,5 @@
+using Domain.Entities;
 using Domain.Repositories;
-using HolidayProject.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

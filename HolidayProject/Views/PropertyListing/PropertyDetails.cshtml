@@ -17,7 +17,7 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            var bookedDates = @Html.Raw(Json.Serialize(Model.BookedDates.Select(d => d.ToString("yyyy-MM-dd"))));
+            var bookedDates = @Html.Raw(Json.Serialize(Model.BookedNights.Select(d => d.Night.ToString("yyyy-MM-dd"))));
 
             $("#bookedDates").datepicker({
                 format: 'yyyy-mm-dd',

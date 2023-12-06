@@ -21,11 +21,11 @@ namespace HolidayProject.Controllers
             var availableProperties = _propertyRepository
                 .GetAllProperties()
                 .Where(
-                    property => property.BookedDates == null ||
-                    !property.BookedDates.Any(
+                    property => property.BookedNights == null ||
+                    !property.BookedNights.Any(
                         bookedDate =>
-                            (start <= bookedDate && bookedDate <= end) ||
-                            (bookedDate <= start && end <= bookedDate)))
+                            (start <= bookedDate.Night && bookedDate.Night <= end) ||
+                            (bookedDate.Night <= start && end <= bookedDate.Night)))
                  .ToList();
 
             return View("ListProperties", availableProperties);
@@ -35,7 +35,7 @@ namespace HolidayProject.Controllers
         {
             var propertyDetails = _propertyRepository
                 .GetAllProperties()
-                .FirstOrDefault(p => p.Id == id);
+                .FirstOrDefault(p => p.PropertyId == id);
 
             if (propertyDetails == null)
             {

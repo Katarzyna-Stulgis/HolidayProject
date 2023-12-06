@@ -12,7 +12,7 @@ namespace Domain.Repositories
             {
                 new Property
                 {
-                    Id = 1,
+                    PropertyId = 1,
                     Name = "Rose Cottage",
                     Blurb = "Beautiful cottage on the Cornwall coast",
                     Location = "Cornwall",
@@ -20,11 +20,11 @@ namespace Domain.Repositories
                     CostPerNight = 350,
                     Description = "A charming cottage with stunning views.",
                     Amenities = "WiFi",
-                    BookedDates = new List<DateTime> { DateTime.Now.AddDays(5), DateTime.Now.AddDays(10) }
+                   BookedNights = new List<BookedNight>()
                 },
                 new Property
                 {
-                    Id = 2,
+                    PropertyId = 2,
                     Name = "Saffron House",
                     Blurb = "Stately home on the Devon moors",
                     Location = "Devon",
@@ -32,7 +32,7 @@ namespace Domain.Repositories
                     CostPerNight = 730,
                     Description = "A grand stately home with luxurious amenities.",
                     Amenities = "Pool",
-                    BookedDates = new List<DateTime> { DateTime.Now.AddDays(8), DateTime.Now.AddDays(15) }
+                    BookedNights = new List<BookedNight>()
                 }
             };
         }
