@@ -1,0 +1,22 @@
+﻿@model IEnumerable<PropertyListingModel>
+
+<h2>List of Properties</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var property in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@property.Name</h5>
+                        <p class="card-text">@property.Blurb</p>
+                        <p class="card-text"><strong>Location:</strong> @property.Location</p>
+                        <p class="card-text"><strong>Bedrooms:</strong> @property.NumberOfBedrooms</p>
+                        <p class="card-text"><strong>Cost per Night:</strong> $@property.CostPerNight</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

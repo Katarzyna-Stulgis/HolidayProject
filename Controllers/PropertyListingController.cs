@@ -27,19 +27,14 @@ namespace HolidayProject.Controllers
             }
         };
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult ListAll()
         {
-            return View();
+            return View("ListProperties", properties);
         }
 
         public IActionResult ListAvailable(DateTime start, DateTime end)
         {
-            return View();
+            return View("ListProperties", properties);
         }
     }
 }
