@@ -13,21 +13,79 @@
         <input class="datetimepicker-input" id="bookedDates" style="cursor: pointer;"></input>
     </div>
 </div>
+<head>
+    <style>
+        .highlighted a {
+            background-color: red !important;
+        }
+
+        .ui-state-default.highlighted {
+            background-color: red !important;
+            border: 1px solid red;
+        }
+
+        .ui-datepicker td.ui-state-disabled > span {
+            background: #c30;
+        }
+
+        .ui-datepicker td.ui-state-disabled {
+            opacity: 100;
+        }
+    </style>
+</head>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
+            var rangeStart = null;
+            var rangeEnd = null;
+
             var bookedDates = @Html.Raw(Json.Serialize(Model.BookedNights.Select(d => d.Night.ToString("yyyy-MM-dd"))));
 
             $("#bookedDates").datepicker({
-                format: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
                 todayHighlight: true,
-                beforeShowDay: function(date) {
+                beforeShowDay: function (date) {
                     var stringDate = $.datepicker.formatDate('yy-mm-dd', date);
-                    return [$.inArray(stringDate, bookedDates) !== -1, ''];
+                    if ($.inArray(stringDate, bookedDates) !== -1) {
+                        return [false, 'highlighted'];
+                    } else if ((rangeStart && date >= rangeStart && !rangeEnd) || (rangeStart && rangeEnd && date >= rangeStart && date <= rangeEnd)) {
+                        return [true, ''];
+                    }
+                    return [true, ''];
+                },
+               onSelect: function (selectedDate) {
+                    if (!$(this).data().datepicker.first) {
+                        $(this).data().datepicker.inline = true;
+                        $(this).data().datepicker.first = selectedDate;
+                    } else {
+                        var overlap = false;
+                        for (var i = 0; i < bookedDates.length; i++) {
+                            if (isDateInRange(bookedDates[i], $(this).data().datepicker.first, selectedDate)) {
+                                overlap = true;
+                                break;
+                            }
+                        }
+
+                        if (selectedDate > $(this).data().datepicker.first && selectedDate && overlap == false) {
+                            $(this).val($(this).data().datepicker.first + " - " + selectedDate);
+                        } else {
+                            delete $(this).data().datepicker.first;
+                            $(this).data().datepicker.inline = false;
+                        }
+                        $(this).data().datepicker.inline = false;
+                    }
+                },
+                onClose: function () {
+                    delete $(this).data().datepicker.first;
+                    $(this).data().datepicker.inline = false;
                 }
             });
+
         });
+        function isDateInRange(date, start, end) {
+            return date >= start && date <= end;
+        }
     </script>
 }

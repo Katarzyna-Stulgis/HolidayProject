@@ -16,7 +16,7 @@ namespace HolidayProject.Controllers
             return View("ListProperties", _propertyRepository.GetAllProperties());
         }
 
-        public IActionResult ListAvailable(DateTime start, DateTime end)
+        public IActionResult ListAvailable(DateTime StartDate, DateTime EndDate)
         {
             var availableProperties = _propertyRepository
                 .GetAllProperties()
@@ -24,8 +24,8 @@ namespace HolidayProject.Controllers
                     property => property.BookedNights == null ||
                     !property.BookedNights.Any(
                         bookedDate =>
-                            (start <= bookedDate.Night && bookedDate.Night <= end) ||
-                            (bookedDate.Night <= start && end <= bookedDate.Night)))
+                            (StartDate <= bookedDate.Night && bookedDate.Night <= EndDate) ||
+                            (bookedDate.Night <= StartDate && EndDate <= bookedDate.Night)))
                  .ToList();
 
             return View("ListProperties", availableProperties);
