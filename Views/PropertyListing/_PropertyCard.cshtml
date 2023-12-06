@@ -1,0 +1,12 @@
+﻿@model PropertyDetailsModel
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Blurb</p>
+        <p><strong>Location:</strong> @Model.Location</p>
+        <p><strong>Bedrooms:</strong> @Model.NumberOfBedrooms</p>
+        <p><strong>Cost per Night:</strong> $@Model.CostPerNight</p>
+        <a href="@Url.Action("ViewPropertyDetails", "PropertyListing", new { id = Model.Id })" class="btn btn-primary">View Details</a>
+    </div>
+</div>

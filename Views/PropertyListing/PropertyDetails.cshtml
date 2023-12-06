@@ -8,5 +8,26 @@
     <p><strong>Cost per Night:</strong> $@Model.CostPerNight</p>
     <p><strong>Description:</strong> @Model.Description</p>
     <p><strong>Amenities:</strong> @string.Join(", ", Model.Amenities)</p>
-    <p><strong>Booked Dates:</strong> @string.Join(", ", Model.BookedDates)</p>
+    <div class="form-group">
+        <p><strong>Booked Dates:</strong></p>
+        <div id="bookedDates" style="cursor: pointer;"></div>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var bookedDates = @Html.Raw(Json.Serialize(Model.BookedDates.Select(d => d.ToString("yyyy-MM-dd"))));
+
+            $("#bookedDates").datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+                beforeShowDay: function(date) {
+                    var stringDate = $.datepicker.formatDate('yy-mm-dd', date);
+                    return [$.inArray(stringDate, bookedDates) !== -1, ''];
+                }
+            });
+        });
+    </script>
+}
