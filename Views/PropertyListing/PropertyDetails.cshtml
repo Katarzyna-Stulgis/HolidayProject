@@ -1,0 +1,12 @@
+﻿@model PropertyDetailsModel
+
+<div class="container mt-4">
+    <h2>@Model.Name</h2>
+    <p>@Model.Blurb</p>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Bedrooms:</strong> @Model.NumberOfBedrooms</p>
+    <p><strong>Cost per Night:</strong> $@Model.CostPerNight</p>
+    <p><strong>Description:</strong> @Model.Description</p>
+    <p><strong>Amenities:</strong> @string.Join(", ", Model.Amenities)</p>
+    <p><strong>Booked Dates:</strong> @string.Join(", ", Model.BookedDates)</p>
+</div>

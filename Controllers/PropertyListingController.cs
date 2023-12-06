@@ -43,10 +43,16 @@ namespace HolidayProject.Controllers
             return View("ListProperties", properties);
         }
 
-        [HttpGet]
-        public IActionResult ViewPropertyDetails([FromRoute] int id)
+        public IActionResult ViewPropertyDetails(int id)
         {
-            return View();
+            var propertyDetails = properties.FirstOrDefault(p => p.Id == id);
+
+            if (propertyDetails == null)
+            {
+                return NotFound();
+            }
+
+            return View("PropertyDetails", propertyDetails);
         }
     }
 }
