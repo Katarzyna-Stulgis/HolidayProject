@@ -16,9 +16,9 @@ namespace Domain.Repositories
         {
             int numberOfNights = (int)(endDate - startDate).TotalDays;
 
-            var property = await _context.Properties
+            var property = _context.Properties
                 .Include(p => p.BookedNights)
-                .FirstOrDefaultAsync(p => p.PropertyId == propertyId);
+                .FirstOrDefault(p => p.PropertyId == propertyId);
 
             if (property == null || !IsPropertyAvailable(property, startDate, numberOfNights))
             {
