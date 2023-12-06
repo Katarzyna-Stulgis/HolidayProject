@@ -40,6 +40,14 @@ namespace HolidayProject.Controllers
 
         public IActionResult ListAvailable(DateTime start, DateTime end)
         {
+            var availableProperties = properties
+                .Where(property =>
+                    property.BookedDates == null ||
+                    !property.BookedDates.Any(bookedDate =>
+                        (bookedDate < start && bookedDate < end) ||
+                        (bookedDate > start && bookedDate > end)))
+                .ToList();
+
             return View("ListProperties", properties);
         }
 
