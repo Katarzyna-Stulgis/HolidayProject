@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PropertyListingModel>
+﻿@model IEnumerable<PropertyDetailsModel>
 
 <h2>List of Properties</h2>
 
@@ -14,6 +14,9 @@
                         <p class="card-text"><strong>Location:</strong> @property.Location</p>
                         <p class="card-text"><strong>Bedrooms:</strong> @property.NumberOfBedrooms</p>
                         <p class="card-text"><strong>Cost per Night:</strong> $@property.CostPerNight</p>
+                        <p class="card-text"><strong>Descryption:</strong> @property.Description</p>
+                        <p class="card-text"><strong>Amenities:</strong> @string.Join(", ", property.Amenities)</p>
+                        <p class="card-text"><strong>Booked Dates:</strong> @string.Join(", ", property.BookedDates)</p>
                     </div>
                 </div>
             </div>
