@@ -8,7 +8,8 @@ namespace HolidayProject.Mappings
     {
         public Mapping()
         {
-            CreateMap<Property, PropertyListingModel>().ReverseMap();
+            CreateMap<PropertyListingModel,Property >().ReverseMap();
+            CreateMap<PropertyDetailsModel,Property> ().ReverseMap();
             CreateMap<BookedNight, PropertyDetailsModel>().ReverseMap();
         }
     }
