@@ -1,7 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace HolidayProject.Controllers
 {

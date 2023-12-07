@@ -29,7 +29,7 @@ namespace Domain.Repositories
             {
                 property.BookedNights.Add(new BookedNight { Night = booking.StartDate.AddDays(i) });
             }
-            
+
             booking.property = property;
 
             _context.Bookings.Add(booking);
