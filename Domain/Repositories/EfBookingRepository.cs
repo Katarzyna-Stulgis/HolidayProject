@@ -12,37 +12,29 @@ namespace Domain.Repositories
             _context = context;
         }
 
-        public Booking MakeBooking(int propertyId, DateTime startDate, DateTime endDate, string userId, string userEmail, string billingAddress)
+        public Booking MakeBooking(Booking booking)
         {
-            int numberOfNights = (int)(endDate - startDate).TotalDays;
+            int numberOfNights = (int)(booking.EndDate - booking.StartDate).TotalDays;
 
             var property = _context.Properties
                 .Include(p => p.BookedNights)
-                .FirstOrDefault(p => p.PropertyId == propertyId);
+                .FirstOrDefault(p => p.PropertyId == booking.PropertyId);
 
-            if (property == null || !IsPropertyAvailable(property, startDate, numberOfNights))
+            if (property == null || !IsPropertyAvailable(property, booking.StartDate, numberOfNights))
             {
                 return null;
             }
 
-            for (int i = 0; i < numberOfNights; i++)
+            for (int i = 0; i <= numberOfNights; i++)
             {
-                property.BookedNights.Add(new BookedNight { Night = startDate.AddDays(i) });
+                property.BookedNights.Add(new BookedNight { Night = booking.StartDate.AddDays(i) });
             }
-
-            var booking = new Booking
-            {
-                StartDate = startDate,
-                EndDate = endDate,
-                CostPerNight = property.CostPerNight,
-                UserId = userId,
-                UserEmail = userEmail,
-                BillingAddress = billingAddress
-            };
+            
+            booking.property = property;
 
             _context.Bookings.Add(booking);
 
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return booking;
         }

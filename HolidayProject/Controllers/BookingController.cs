@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace HolidayProject.Controllers
 {
@@ -13,7 +14,7 @@ namespace HolidayProject.Controllers
             _bookingRepository = bookingRepository;
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Create(int propertyId, DateTime startDate, DateTime endDate)
         {
             var model = new Booking
@@ -27,25 +28,30 @@ namespace HolidayProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitBooking(Booking model)
+        public IActionResult SubmitBooking(int propertyId, DateTime startDate, DateTime endDate, string UserEmail, string BillingAddress)
         {
-            var booking = _bookingRepository.MakeBooking(
-                model.PropertyId,
-                model.StartDate,
-                model.EndDate,
-                model.UserId,
-                model.UserEmail,
-                model.BillingAddress
-            );
-
-            if (booking != null)
+            var booking = new Booking
             {
-                return View("BookingSuccess", booking);
+                PropertyId = propertyId,
+                StartDate = startDate,
+                EndDate = endDate,
+                UserEmail = UserEmail,
+                BillingAddress = BillingAddress
+            };
+
+            var bk = _bookingRepository.MakeBooking(booking);
+
+            if (bk != null)
+            {
+                return View("BookingSuccess", bk);
             }
             else
             {
                 return View("BookingFailure");
             }
+
+
+            return View();
         }
     }
 }
