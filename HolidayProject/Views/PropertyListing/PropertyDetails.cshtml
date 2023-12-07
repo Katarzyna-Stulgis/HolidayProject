@@ -1,5 +1,7 @@
 ﻿@model Domain.Entities.Property
 
+<a href="@Url.Action("AddImage", "PropertyManagement", new { id = Model.PropertyId })" class="btn btn-primary">Upload Image to property</a>
+
 <form asp-action="Create" asp-controller="Booking" class="container mt-4">
     <h2 class="mb-3">@Model.Name</h2>
     <p>@Model.Blurb</p>
@@ -19,6 +21,7 @@
 
     <button type="submit" class="btn btn-primary mt-4">Submit</button>
 </form>
+    
 <head>
     <style>
         .highlighted a {

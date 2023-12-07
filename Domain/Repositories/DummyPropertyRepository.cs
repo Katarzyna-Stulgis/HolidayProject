@@ -46,5 +46,10 @@ namespace Domain.Repositories
         {
             properties.Add(property);
         }
+
+        public void AddPropertyImage(int propertyId, string imageUrl)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

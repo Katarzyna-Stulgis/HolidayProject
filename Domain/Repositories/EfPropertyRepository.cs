@@ -30,5 +30,22 @@ namespace Domain.Repositories
             _dbContext.Properties.Add(property);
             _dbContext.SaveChanges();
         }
+
+        public void AddPropertyImage(int propertyId, string imageUrl)
+        {
+            var property = _dbContext.Properties.Include(p => p.Images).FirstOrDefault(p => p.PropertyId == propertyId);
+
+            if (property != null)
+            {
+                var propertyImage = new PropertyImage
+                {
+                    Property = property,
+                    ImageUrl = imageUrl
+                };
+
+                property.Images.Add(propertyImage);
+                _dbContext.SaveChanges();
+            }
+        }
     }
 }

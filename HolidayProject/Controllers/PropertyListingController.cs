@@ -33,7 +33,9 @@ namespace HolidayProject.Controllers
                             (bookedDate.Night <= StartDate && EndDate <= bookedDate.Night)))
                  .ToList();
 
-            return View("ListProperties", availableProperties);
+            var list = _mapper.Map<IEnumerable<PropertyListingModel>>(availableProperties);
+
+            return View("ListProperties", list);
         }
 
         public IActionResult ViewPropertyDetails(int id)

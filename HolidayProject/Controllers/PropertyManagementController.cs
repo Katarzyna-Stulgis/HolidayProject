@@ -3,6 +3,7 @@ using Domain.Entities;
 using Domain.Repositories;
 using HolidayProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace HolidayProject.Controllers
 {
@@ -10,12 +11,14 @@ namespace HolidayProject.Controllers
     {
         private readonly IPropertyRepository _propertyRepository;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _environment;
 
 
-        public PropertyManagementController(IPropertyRepository propertyRepository, IMapper mapper)
+        public PropertyManagementController(IPropertyRepository propertyRepository, IMapper mapper, IWebHostEnvironment environment)
         {
             _propertyRepository = propertyRepository;
             _mapper = mapper;
+            _environment = environment;
         }
         public IActionResult AddProperty()
         {
@@ -29,5 +32,30 @@ namespace HolidayProject.Controllers
             _propertyRepository.AddProperty(property);
             return RedirectToAction("ListAll", "PropertyListing");
         }
+
+        [HttpGet]
+        public IActionResult AddImage(int id)
+        {
+            var addImageModel = new AddImageModel { PropertyId = id };
+            return View(addImageModel);
+        }
+
+        [HttpPost]
+        public IActionResult UploadImage(AddImageModel model)
+        {
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(model.Image.FileName)}";
+
+            var urlPath = $"/images/{fileName}";
+            var filePath = $"{_environment.ContentRootPath}/wwwroot{urlPath}";
+            using (var stream = System.IO.File.Create(filePath))
+            {
+                model.Image.CopyTo(stream);
+            }
+
+            _propertyRepository.AddPropertyImage(model.PropertyId, urlPath);
+
+            return RedirectToAction("Details", "Property", new { id = model.PropertyId });
+        }
+
     }
 }

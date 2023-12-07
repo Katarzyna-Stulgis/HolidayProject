@@ -6,5 +6,6 @@ namespace Domain.Repositories
     {
         IEnumerable<Property> GetAllProperties();
         void AddProperty(Property property);
+        void AddPropertyImage(int propertyId, string imageUrl);
     }
 }
