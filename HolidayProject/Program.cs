@@ -47,9 +47,18 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=PropertyListing}/{action=ListAll}/{id?}");
+
+    endpoints.MapRazorPages();
+});
+/*
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
 app.MapRazorPages();
 
 app.Run();
