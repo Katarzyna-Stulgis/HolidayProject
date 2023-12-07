@@ -54,7 +54,7 @@ namespace HolidayProject.Controllers
 
             _propertyRepository.AddPropertyImage(model.PropertyId, urlPath);
 
-            return RedirectToAction("Details", "Property", new { id = model.PropertyId });
+            return RedirectToAction("ListAll", "PropertyListing");
         }
 
     }
