@@ -10,5 +10,7 @@
         public string? UserId { get; set; }
         public string UserEmail { get; set; }
         public string BillingAddress { get; set; }
+
+        public Property property { get; set; }
     }
 }
