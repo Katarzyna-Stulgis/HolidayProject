@@ -1,4 +1,6 @@
-﻿using Domain.Repositories;
+﻿using AutoMapper;
+using Domain.Repositories;
+using HolidayProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HolidayProject.Controllers
@@ -6,14 +8,17 @@ namespace HolidayProject.Controllers
     public class PropertyListingController : Controller
     {
         private readonly IPropertyRepository _propertyRepository;
+        private readonly IMapper _mapper;
 
-        public PropertyListingController(IPropertyRepository propertyRepository)
+        public PropertyListingController(IPropertyRepository propertyRepository, IMapper mapper)
         {
             _propertyRepository = propertyRepository;
+            _mapper = mapper;
         }
         public IActionResult ListAll()
         {
-            return View("ListProperties", _propertyRepository.GetAllProperties());
+            var list = _mapper.Map<IEnumerable<PropertyListingModel>>(_propertyRepository.GetAllProperties());
+            return View("ListProperties", list);
         }
 
         public IActionResult ListAvailable(DateTime StartDate, DateTime EndDate)
