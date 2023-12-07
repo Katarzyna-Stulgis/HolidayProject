@@ -1,39 +1,39 @@
 ﻿@model Domain.Entities.Property
 
-<h2>Add New Property</h2>
+<h2 class="mb-4">Add New Property</h2>
 
-<form asp-action="AddProperty" method="post">
-    <div class="form-group">
+<form asp-action="AddProperty" method="post" class="col-6">
+    <div class="form-group mb-3">
         <label asp-for="Name" class="control-label">Name:</label>
         <input asp-for="Name" class="form-control" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label asp-for="Blurb" class="control-label">Blurb:</label>
         <textarea asp-for="Blurb" class="form-control"></textarea>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label asp-for="Location" class="control-label">Location:</label>
         <input asp-for="Location" class="form-control" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label asp-for="NumberOfBedrooms" class="control-label">Number of Bedrooms:</label>
         <input asp-for="NumberOfBedrooms" type="number" class="form-control" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label asp-for="CostPerNight" class="control-label">Cost per Night:</label>
         <input asp-for="CostPerNight" type="number" class="form-control" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label asp-for="Description" class="control-label">Description:</label>
         <input asp-for="Description" type="text" class="form-control" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label asp-for="Amenities" class="control-label">Amenities:</label>
         <input asp-for="Amenities" type="text" class="form-control" />
     </div>

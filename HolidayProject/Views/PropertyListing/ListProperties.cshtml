@@ -1,11 +1,16 @@
 ﻿@model IEnumerable<Domain.Entities.Property>
 
-<div class="container mt-4">
+<div class="container col-12">
     @await Component.InvokeAsync("SearchProperties")
-    <h2>List of Properties</h2>
 
-    @foreach (var property in Model)
-    {
-        @Html.Partial("_PropertyCard", property)
-    }
+    <h3 class="mt-4">List of Properties</h3>
+
+    <div class="row">
+        @foreach (var property in Model)
+        {
+            <div class="col-4">
+                @Html.Partial("_PropertyCard", property)
+            </div>
+        }
+    </div>
 </div>
