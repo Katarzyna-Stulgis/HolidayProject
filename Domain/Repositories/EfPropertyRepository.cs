@@ -14,13 +14,17 @@ namespace Domain.Repositories
 
         public IEnumerable<Property> GetAllProperties()
         {
-            return _dbContext.Properties.Include(p => p.BookedNights).ToList();
+            return _dbContext.Properties
+                .Include(p => p.BookedNights)
+                .Include(p => p.Images)
+                .ToList();
         }
 
         public IEnumerable<Property> GetAvailableProperties(DateTime startDate, DateTime endDate)
         {
             return _dbContext.Properties
                 .Include(p => p.BookedNights)
+                .Include(p => p.Images)
                 .Where(p => !p.BookedNights.Any(bn => bn.Night >= startDate && bn.Night <= endDate))
                 .ToList();
         }

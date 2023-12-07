@@ -5,26 +5,30 @@
         <h5 class="card-title">@Model.Name</h5>
         <div id="carouselExampleSlidesOnly" class="carousel slide " data-bs-ride="carousel" data-bs-interval="1000">
             <div class="carousel-inner">
-              @*   @for (int i = 0; i < Model.Images.Count(); i++) *@
-                @for (int i = 0; i < 3; i++)
+                @for (int i = 0; i < Model.Images.Count(); i++)
                 {
                     if (i == 0)
                     {
                         <div class="carousel-item active">
 
-                           @*  <img src="@Model.Images.ElementAt(i)" alt="Property Image" class="d-block w-100" /> *@
-
-                            <img src="https://i.imgur.com/250X2v6.jpeg" alt="Property Image" class="d-block w-100" />
+                            <img src="@Model.Images.ElementAt(i)" alt="Property Image" class="d-block w-100" />
                         </div>
                     }
                     else
                     {
                         <div class="carousel-item">
 
-                            <img src="https://i.imgur.com/250X2v6.jpeg" alt="Property Image" class="d-block w-100" />
+                            <img src="@Model.Images.ElementAt(i)" alt="Property Image" class="d-block w-100" />
 
                         </div>
                     }
+                }
+                @if (Model.Images.Count() == 0)
+                {
+                    <div class="carousel-item active">
+
+                        <img src="https://i.imgur.com/250X2v6.jpeg" alt="Property Image" class="d-block w-100" />
+                    </div>
                 }
             </div>
         </div>
